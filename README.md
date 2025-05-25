@@ -2,7 +2,7 @@
 
 When debugging using Visual studio, it adds 2 scripts which are blocked by default. This is a script attack and should be blocked .
 
-If you would like to allow this in visual Studio debugging, you can use the **#if !DEBUG** to allow the following injecting scripts:
+If you would like to allow this in visual Studio debugging, you can use the **#if !DEBUG** to allow the following injected scripts:
 
 ```xml
 
