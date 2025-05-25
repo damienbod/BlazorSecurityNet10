@@ -1,10 +1,6 @@
 using BlazorApp.Components;
 using BlazorApp;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,12 +10,9 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpContextAccessor();
 
-var oidcConfig = builder.Configuration.GetSection("OpenIDConnectSettings");
-
 builder.Services.AddSecurityHeaderPolicies()
     .SetDefaultPolicy(SecurityHeadersDefinitions
-    .GetHeaderPolicyCollection(oidcConfig["Authority"],
-        builder.Environment.IsDevelopment()));
+    .GetHeaderPolicyCollection(builder.Environment.IsDevelopment()));
 
 var app = builder.Build();
 
@@ -34,8 +27,7 @@ else
     IdentityModelEventSource.LogCompleteSecurityArtifact = true;
 }
 
-//app.UseSecurityHeaders();
-
+app.UseSecurityHeaders();
 
 app.UseHttpsRedirection();
 

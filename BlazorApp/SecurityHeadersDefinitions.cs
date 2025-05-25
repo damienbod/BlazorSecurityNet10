@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Builder;
 
 public static class SecurityHeadersDefinitions
 {
-    public static HeaderPolicyCollection GetHeaderPolicyCollection(string? idpHost, bool isDev)
+    public static HeaderPolicyCollection GetHeaderPolicyCollection(bool isDev)
     {
-        ArgumentNullException.ThrowIfNull(idpHost);
+        //ArgumentNullException.ThrowIfNull(idpHost);
 
         var policy = new HeaderPolicyCollection()
             .AddFrameOptionsDeny()
@@ -14,13 +14,13 @@ public static class SecurityHeadersDefinitions
             .AddReferrerPolicyStrictOriginWhenCrossOrigin()
             .AddCrossOriginOpenerPolicy(builder => builder.SameOrigin())
             .AddCrossOriginResourcePolicy(builder => builder.SameOrigin())
-            .AddCrossOriginEmbedderPolicy(builder => builder.RequireCorp()) // remove for dev if using hot reload
+            .AddCrossOriginEmbedderPolicy(builder => builder.RequireCorp()) 
             .AddContentSecurityPolicy(builder =>
             {
                 builder.AddObjectSrc().None();
                 builder.AddBlockAllMixedContent();
                 builder.AddImgSrc().Self().From("data:");
-                builder.AddFormAction().Self().From(idpHost);
+                builder.AddFormAction().Self(); //.From(idpHost);
                 builder.AddFontSrc().Self();
                 builder.AddStyleSrc().Self().UnsafeInline();
                 builder.AddBaseUri().Self();
