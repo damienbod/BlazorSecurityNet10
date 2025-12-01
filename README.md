@@ -1,4 +1,4 @@
-# Blazor Security .NET 10
+# Using a content security policy with static assets in Blazor .NET 10
 
 Add the `NetEscapades.AspNetCore.SecurityHeaders` NuGet package to your Blazor Server project to add security headers to your application. This package provides a middleware that can be configured to set various HTTP headers to enhance the security of your Blazor application.
 
